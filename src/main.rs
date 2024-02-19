@@ -1,17 +1,26 @@
 use std::io::{self, Error};
 
 fn main() -> Result<(), Error> {
-    // let a = one_line()?;
-    // let a = one_line_array()?;
-    let a = multi_line_array(3)?;
-
-    println!("{:?}", a);
+    let h = i()?;
+    let hh = i()?;
+    println!("{}", h - hh);
 
     Ok(())
 }
 
+/// i
+#[allow(dead_code)]
+fn i() -> Result<i128, Error> {
+    let mut buffer = String::new();
+    io::stdin().read_line(&mut buffer)?;
+    let a: i128 = buffer.trim().parse().unwrap();
+
+    Ok(a)
+}
+
 /// s
-fn one_line() -> Result<String, Error> {
+#[allow(dead_code)]
+fn s() -> Result<String, Error> {
     let mut buffer = String::new();
     io::stdin().read_line(&mut buffer)?;
     let a: String = buffer.trim().parse().unwrap();
@@ -19,18 +28,22 @@ fn one_line() -> Result<String, Error> {
     Ok(a)
 }
 
-/// i
-fn one_line_int() -> Result<i32, Error> {
-    let mut buffer = String::new();
-    io::stdin().read_line(&mut buffer)?;
-    let a: i32 = buffer.trim().parse().unwrap();
 
+/// i i i
+#[allow(dead_code)]
+fn o_i_array() -> Result<Vec<i128>, Error> {
+    let mut buffer  = String::new();
+    io::stdin().read_line(&mut buffer)?;
+
+    let a: Vec<i128> = buffer.trim().split_whitespace()
+        .map(|e| e.parse().ok().unwrap())
+        .collect();
     Ok(a)
 }
 
-///
-/// x x x
-fn one_line_array() -> Result<Vec<String>, Error> {
+/// s s s
+#[allow(dead_code)]
+fn o_s_array() -> Result<Vec<String>, Error> {
     let mut buffer = String::new();
     io::stdin().read_line(&mut buffer)?;
 
@@ -40,14 +53,27 @@ fn one_line_array() -> Result<Vec<String>, Error> {
     Ok(a)
 }
 
-///
-/// x x x
-/// x x x
-/// x x x
-fn multi_line_array(count: i32) -> Result<Vec<Vec<String>>, Error> {
+/// s s s
+/// s s s
+/// s s s
+#[allow(dead_code)]
+fn m_s_array(count: i128) -> Result<Vec<Vec<String>>, Error> {
     let mut result = Vec::new();
-    for n in 0..count {
-        result.push(one_line_array()?);
+    for _n in 0..count {
+        result.push(o_s_array()?);
+    }
+
+    Ok(result)
+}
+
+/// i i i
+/// i i i
+/// i i i
+#[allow(dead_code)]
+fn m_i_array(count: i128) -> Result<Vec<Vec<i128>>, Error> {
+    let mut result = Vec::new();
+    for _n in 0..count {
+        result.push(o_i_array()?);
     }
 
     Ok(result)
