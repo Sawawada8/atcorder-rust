@@ -2,8 +2,7 @@ use std::io::{self, Error};
 
 fn main() -> Result<(), Error> {
     let h = i()?;
-    let hh = i()?;
-    println!("{}", h - hh);
+    println!("{}", h);
 
     Ok(())
 }
